@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,51 +40,51 @@ public class DeleteColumnTest {
 	CSVColumnDeleter csvColumnDeleter = new CSVColumnDeleter();
 	
 	 @Test
-	/*******************************************************
-	* testSourceDirectoryInputFiles
-	* It will check if the input folder contains files or not.
+	/*******************************************************************
+	* Test Case:testSourceDirectoryInputFiles
+	* Description:It will check if the input folder contains files or not.
 	* Returns true if files exists, else false. 
-	********************************************************/
+	*********************************************************************/
 	public void testSourceDirectoryInputFiles() throws IOException {
 		final File folder = new File(input); 		       
 		File [] fileNames = folder.listFiles(); 
-		assertEquals(true, csvColumnDeleter.SourceDirectoryFile(fileNames));
+		assertEquals(true, csvColumnDeleter.sourceDirectoryFile(fileNames));
 	}
 
     @Test
-	/*******************************************************
-	* testInputFileData
-	* Check if the input files contain data or not
+	/*********************************************************
+	* Test Case:testInputFileData
+	* Description:Check if the input files contain data or not
 	* Returns true if data exists, else false. 
-	********************************************************/
+	**********************************************************/
 	public void testInputFileData() throws IOException {
 		final File folder = new File(input); 		       
 		File [] fileNames = folder.listFiles(); 
 		for(File file:fileNames) {
-			assertEquals(true, csvColumnDeleter.SourceDirectoryFileData(file));
+			assertEquals(true, csvColumnDeleter.sourceDirectoryFileData(file));
 		}
 	}
 	
 	@Test
-	/************************************************************************
-	* testDeleteColumn
-	*Check whether that Error column data which user entered is deleted or not.
-	*************************************************************************/	
+	/*************************************************************************************
+	*Test Case:testDeleteColumn
+	*Description:Check whether that Error column data which user entered is deleted or not.
+	**************************************************************************************/	
 	
 	public void testDeleteColumn() throws FileNotFoundException {
 		csvColumnDeleter.obtainDirectoryListing(input, output, columnToDelete);		
-		assertEquals(true, csvColumnDeleter.ColumnDeleteCSV(buffer,columnToDelete));				
+		assertEquals(true, csvColumnDeleter.columnDeleteCSV(buffer,columnToDelete));				
 	}
 	
 	@Test
-	/**
-	* testwriteFilesToDisk
-	*It will check whether all the input files are present in the output directory
-	*
-	*/
+	/*****************************************************************************************
+	*Test Case:testwriteFilesToDisk
+	*Description:It will check whether all the input files are present in the output directory
+	******************************************************************************************/
 	public void testwriteFilesToDisk() throws FileNotFoundException {
 		assertEquals(true, csvColumnDeleter.writeAllFilesToDisk(input,output));				
 	}
 
 	
+
 }
